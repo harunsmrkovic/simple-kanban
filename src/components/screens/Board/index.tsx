@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { DragDropContext } from '@hello-pangea/dnd';
 import Column from './Column';
 
 import styles from './index.module.css';

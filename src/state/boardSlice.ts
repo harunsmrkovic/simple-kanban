@@ -54,13 +54,10 @@ export const boardSlice = createSlice({
         column.cards = cards;
       }
     },
-    updateColumns: (state, action: PayloadAction<BoardColumn[]>) => {
-      state.columns = action.payload;
-    },
   },
 });
 
-export const { updateColumn, updateColumns } = boardSlice.actions;
+export const { updateColumn } = boardSlice.actions;
 
 export const selectAllColumns = (state: RootState) => state.board.columns;
 

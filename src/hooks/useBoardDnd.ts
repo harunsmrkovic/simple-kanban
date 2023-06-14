@@ -1,11 +1,6 @@
 import { DropResult } from '@hello-pangea/dnd';
 import { moveBetweenLists, reorderInList } from '../utils/dnd';
-import {
-  BoardColumn,
-  selectColumn,
-  updateColumn,
-  updateColumns,
-} from '../state/boardSlice';
+import { BoardColumn, selectColumn, updateColumn } from '../state/boardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface UseBoardDndProps {
@@ -40,10 +35,6 @@ export const useBoardDnd = ({ columns }: UseBoardDndProps) => {
       );
 
       dispatch(updateColumn({ cards, columnId: sourceId }));
-
-      //   const newState = [...sourceColumn];
-      //   newState[sInd] = items;
-      //   setState(newState);
     } else {
       const { newSource, newDestination } = moveBetweenLists(
         sourceColumn,
