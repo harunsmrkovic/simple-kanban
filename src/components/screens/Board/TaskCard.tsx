@@ -22,6 +22,8 @@ export const TaskCard = memo(
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
+            role="listitem"
+            aria-label={title}
             style={getItemStyle(
               snapshot.isDragging,
               provided.draggableProps.style,

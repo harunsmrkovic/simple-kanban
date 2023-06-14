@@ -13,7 +13,11 @@ export default function Column({ id, title }: ColumnProps) {
   const column = getColumn(id);
 
   return (
-    <section className={styles.column}>
+    <section
+      className={styles.column}
+      role="list"
+      aria-label={`List of ${title} tasks`}
+    >
       <header className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
         <button type="button" title="Add task" className={styles.button}>

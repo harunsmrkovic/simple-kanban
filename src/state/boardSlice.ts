@@ -12,6 +12,7 @@ interface BoardState {
   columns: BoardColumn[];
 }
 
+// TODO: IMPLEMENT!
 const INITIAL_COLUMNS = ['todo', 'inProgress', 'done'];
 
 const initialState: BoardState = {
