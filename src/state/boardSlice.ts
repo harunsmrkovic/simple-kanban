@@ -1,53 +1,72 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './';
 import { BoardCard } from './types';
 
-interface BoardColumn {
+export interface BoardColumn {
+  id: string;
   name: string;
   cards: BoardCard[];
 }
 
 interface BoardState {
-  columns: Record<string, BoardColumn>;
+  columns: BoardColumn[];
 }
 
+const INITIAL_COLUMNS = ['todo', 'inProgress', 'done'];
+
 const initialState: BoardState = {
-  columns: {
-    todo: {
+  columns: [
+    {
+      id: 'todo',
       name: 'To Do',
-      cards: [{ id: 2, title: 'todo test' }],
+      cards: [{ id: '2', title: 'todo test' }],
     },
-    inProgress: {
+    {
+      id: 'inProgress',
       name: 'In Progress',
       cards: [
-        { id: 1, title: 'test' },
-        { id: 3, title: 'in prog 2' },
+        { id: '1', title: 'test' },
+        { id: '3', title: 'in prog 2' },
       ],
     },
-    done: {
+    {
+      id: 'done',
       name: 'Done',
       cards: [
-        { id: 4, title: 'done 1' },
-        { id: 5, title: 'done 2' },
+        { id: '4', title: 'done 1' },
+        { id: '5', title: 'done 2' },
       ],
     },
-  },
+  ],
 };
 
 export const boardSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
-    registerColumn: (state, action: PayloadAction<number>) => {},
+    updateColumn: (
+      state,
+      action: PayloadAction<{ columnId: string; cards: BoardCard[] }>,
+    ) => {
+      const { columnId, cards } = action.payload;
+      const column = state.columns.find((column) => column.id === columnId);
+      if (column) {
+        column.cards = cards;
+      }
+    },
+    updateColumns: (state, action: PayloadAction<BoardColumn[]>) => {
+      state.columns = action.payload;
+    },
   },
 });
 
-export const { registerColumn } = boardSlice.actions;
+export const { updateColumn, updateColumns } = boardSlice.actions;
 
-export const selectColumnIds = (state: RootState) =>
-  Object.keys(state.board.columns);
+export const selectAllColumns = (state: RootState) => state.board.columns;
 
-export const selectColumn = (state: RootState) => (columnId: string) =>
-  state.board.columns[columnId];
+export const selectColumn = createSelector([selectAllColumns], (columns) => {
+  return (columnId: string) =>
+    columns.find((column) => column.id === columnId) ?? null;
+});
 
 export default boardSlice.reducer;

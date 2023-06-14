@@ -1,4 +1,4 @@
 export interface BoardCard {
-  id: number;
+  id: string;
   title: string;
 }

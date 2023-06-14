@@ -5,6 +5,7 @@ import TaskForm from './TaskForm';
 import { selectColumn } from '../../../state/boardSlice';
 import { useSelector } from 'react-redux';
 import { TaskCard } from './TaskCard';
+import { Droppable } from '@hello-pangea/dnd';
 
 export type ColumnProps = { id: string; title: string };
 export default function Column({ id, title }: ColumnProps) {
@@ -20,10 +21,27 @@ export default function Column({ id, title }: ColumnProps) {
         </button>
       </header>
       <div>
-        {column.cards.map((card) => (
-          <TaskCard boardCard={card} />
-        ))}
+        <Droppable droppableId={id}>
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+              {...provided.droppableProps}
+            >
+              {column?.cards.map((card, index) => (
+                <TaskCard key={card.id} boardCard={card} index={index} />
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </div>
     </section>
   );
 }
+
+const getListStyle = (isDraggingOver: boolean) => ({
+  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  padding: 8,
+  width: 250,
+});
