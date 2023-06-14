@@ -20,7 +20,7 @@ export default function Column({ id, title }: ColumnProps) {
           <PlusIcon />
         </button>
       </header>
-      <div>
+      <div className={styles.cards}>
         <Droppable droppableId={id}>
           {(provided, snapshot) => (
             <div
@@ -43,5 +43,4 @@ export default function Column({ id, title }: ColumnProps) {
 const getListStyle = (isDraggingOver: boolean) => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: 8,
-  width: 250,
 });

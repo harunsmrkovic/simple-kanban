@@ -1,5 +1,4 @@
 .header {
-  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -8,10 +7,6 @@
   height: 6rem;
   background: #4364af;
   padding: 0 2rem;
-}
-
-.spacing {
-  height: 6rem;
 }
 
 .title {

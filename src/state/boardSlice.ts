@@ -19,22 +19,40 @@ const initialState: BoardState = {
     {
       id: 'todo',
       name: 'To Do',
-      cards: [{ id: '2', title: 'todo test' }],
+      cards: [
+        {
+          id: '2',
+          text: '123',
+          email: 'hakazvaka@gmail.com',
+          title: 'todo test',
+        },
+      ],
     },
     {
       id: 'inProgress',
       name: 'In Progress',
       cards: [
-        { id: '1', title: 'test' },
-        { id: '3', title: 'in prog 2' },
+        { id: '1', text: '123', email: 'hakazvaka@gmail.com', title: 'test' },
+        {
+          id: '3',
+          text: '123',
+          email: 'hakazvaka@gmail.com',
+          title: 'in prog 2',
+        },
+        ...Array.from({ length: 10 }).map((_, index) => ({
+          id: `${index}`,
+          text: '123',
+          email: 'hakazvaka@gmail.com',
+          title: `in prog ${index}`,
+        })),
       ],
     },
     {
       id: 'done',
       name: 'Done',
       cards: [
-        { id: '4', title: 'done 1' },
-        { id: '5', title: 'done 2' },
+        { id: '4', text: '123', email: 'hakazvaka@gmail.com', title: 'done 1' },
+        { id: '5', text: '123', email: 'hakazvaka@gmail.com', title: 'done 2' },
       ],
     },
   ],
