@@ -1,11 +1,16 @@
 import PlusIcon from 'components/icons/PlusIcon';
 
-// import TaskForm from './TaskForm';
-
 import styles from './Column.module.css';
+import TaskForm from './TaskForm';
+import { selectColumn } from '../../../state/boardSlice';
+import { useSelector } from 'react-redux';
+import { TaskCard } from './TaskCard';
 
-export type ColumnProps = { title: string };
-export default function Column({ title }: ColumnProps) {
+export type ColumnProps = { id: string; title: string };
+export default function Column({ id, title }: ColumnProps) {
+  const getColumn = useSelector(selectColumn);
+  const column = getColumn(id);
+
   return (
     <section className={styles.column}>
       <header className={styles.header}>
@@ -14,7 +19,11 @@ export default function Column({ title }: ColumnProps) {
           <PlusIcon />
         </button>
       </header>
-      <div>{/* <TaskForm /> */}</div>
+      <div>
+        {column.cards.map((card) => (
+          <TaskCard boardCard={card} />
+        ))}
+      </div>
     </section>
   );
 }

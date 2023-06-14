@@ -5,9 +5,9 @@ import styles from './index.module.css';
 export default function Board() {
   return (
     <div className={styles.board}>
-      <Column title="To do" />
-      <Column title="In progress" />
-      <Column title="Done" />
+      <Column id="todo" title="To do" />
+      <Column id="inProgress" title="In progress" />
+      <Column id="done" title="Done" />
     </div>
   );
 }
