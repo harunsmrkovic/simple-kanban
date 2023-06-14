@@ -22,9 +22,9 @@ const initialState: BoardState = {
       cards: [
         {
           id: '2',
-          text: '123',
+          text: 'Have a call with a Close Engineering Manager.',
           email: 'hakazvaka@gmail.com',
-          title: 'todo test',
+          title: 'Technical Call 2',
         },
       ],
     },
@@ -35,13 +35,13 @@ const initialState: BoardState = {
         { id: '1', text: '123', email: 'hakazvaka@gmail.com', title: 'test' },
         {
           id: '3',
-          text: '123',
+          text: 'Learn about Close’s culture with Harmonie, from the People Ops team.',
           email: 'hakazvaka@gmail.com',
-          title: 'in prog 2',
+          title: 'Culture Call',
         },
         ...Array.from({ length: 10 }).map((_, index) => ({
-          id: `${index}`,
-          text: '123',
+          id: `${20 + index}`,
+          text: 20 + index + '123',
           email: 'hakazvaka@gmail.com',
           title: `in prog ${index}`,
         })),

@@ -1,0 +1,31 @@
+.cardWrap {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: var(--padding-s);
+    margin-bottom: var(--padding-s);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+}
+
+.title {
+    color: var(--color-brand-blue);
+    font-size: 18px;
+    margin: 0;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-xs);
+}
+
+.emailImage {
+    border-radius: 50%;
+}
+
+.text {
+    color: var(--color-text-default);
+    font-size: 14px;
+    margin: 0;
+}

@@ -1,6 +1,6 @@
 .column {
-  padding: 1rem;
-  background: #efefef;
+  padding: var(--padding-s);
+  background: var(--color-gray-5);
   border: 1px solid #dadada;
   border-radius: 6px;
   width: 20rem;
@@ -9,16 +9,18 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  gap: var(--padding-s);
   scroll-snap-align: center;
 }
 
 .header {
   display: flex;
+  align-items: center;
 }
 
 .title {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: var(--font-size-m);
   line-height: 2rem;
   color: #222;
 }
@@ -31,10 +33,11 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  width: 2rem;
-  height: 2rem;
+  width: 1rem;
+  height: 1rem;
 }
 
 .cards {
   overflow-y: scroll;
+  height: 100%;
 }

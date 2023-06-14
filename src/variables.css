@@ -1,6 +1,13 @@
 :root {
+  --padding-xs: 0.5rem;
   --padding-s: 1rem;
   --padding-m: 2rem;
   --padding-l: 3rem;
   --padding-xl: 4rem;
+
+  --font-size-m: 1.5rem;
+
+  --color-brand-blue: #1463FF;
+  --color-gray-5: #F1F1F1;
+  --color-text-default: #303030;
 }

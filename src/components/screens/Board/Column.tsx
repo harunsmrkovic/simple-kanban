@@ -20,27 +20,20 @@ export default function Column({ id, title }: ColumnProps) {
           <PlusIcon />
         </button>
       </header>
-      <div className={styles.cards}>
-        <Droppable droppableId={id}>
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-              {...provided.droppableProps}
-            >
-              {column?.cards.map((card, index) => (
-                <TaskCard key={card.id} boardCard={card} index={index} />
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
+      <Droppable droppableId={id}>
+        {(provided) => (
+          <div
+            className={styles.cards}
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {column?.cards.map((card, index) => (
+              <TaskCard key={card.id} boardCard={card} index={index} />
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </section>
   );
 }
-
-const getListStyle = (isDraggingOver: boolean) => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  padding: 8,
-});

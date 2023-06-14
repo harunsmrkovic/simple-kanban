@@ -1,42 +1,54 @@
 import { Draggable, DraggableStyle } from '@hello-pangea/dnd';
 import { BoardCard } from '../../../state/types';
+import md5 from 'md5';
+
+import styles from './TaskCard.module.css';
+import { memo } from 'react';
 
 interface TaskCardProps {
   boardCard: BoardCard;
   index: number;
 }
 
-export const TaskCard = ({ boardCard, index }: TaskCardProps): JSX.Element => {
-  const { id, title } = boardCard;
-  return (
-    <Draggable key={id} draggableId={id} index={index}>
-      {(provided, snapshot) => (
-        <div
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          style={getItemStyle(
-            snapshot.isDragging,
-            provided.draggableProps.style,
-          )}
-        >
-          {title}
-        </div>
-      )}
-    </Draggable>
-  );
-};
+export const TaskCard = memo(
+  ({ boardCard, index }: TaskCardProps): JSX.Element => {
+    const { id, text, title, email } = boardCard;
+
+    return (
+      <Draggable key={id} draggableId={id} index={index}>
+        {(provided, snapshot) => (
+          <div
+            className={styles.cardWrap}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={getItemStyle(
+              snapshot.isDragging,
+              provided.draggableProps.style,
+            )}
+          >
+            <div className={styles.cardHeader}>
+              <img
+                className={styles.emailImage}
+                alt="avatar"
+                src={`https://www.gravatar.com/avatar/${md5(email)}?s=24`}
+              />
+              <h3 className={styles.title}>{title}</h3>
+            </div>
+            <p className={styles.text}>{text}</p>
+          </div>
+        )}
+      </Draggable>
+    );
+  },
+);
 
 const getItemStyle = (
   isDragging: boolean,
   draggableStyle?: DraggableStyle,
 ) => ({
-  // some basic styles to make the items look a bit nicer
-  padding: 8 * 2,
-  margin: `0 0 8px 0`,
-
   // change background colour if dragging
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? 'lightgreen' : 'white',
 
   // styles we need to apply on draggables
   ...draggableStyle,
