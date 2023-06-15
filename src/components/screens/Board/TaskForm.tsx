@@ -26,6 +26,7 @@ export const TaskForm = ({ onCancel, onSave }: TaskFormProps) => {
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = event.target;
+    setTouched(true);
     setValues((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -34,7 +35,6 @@ export const TaskForm = ({ onCancel, onSave }: TaskFormProps) => {
 
     if (!values.title) return;
 
-    setTouched(true);
     onSave(values);
   };
 
@@ -50,8 +50,14 @@ export const TaskForm = ({ onCancel, onSave }: TaskFormProps) => {
     onCancel();
   };
 
+  const onFormKeyboard = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Escape') {
+      onCancelClick();
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit} className={styles.wrap}>
+    <form onSubmit={onSubmit} className={styles.wrap} onKeyUp={onFormKeyboard}>
       <label className={styles.labelSection}>
         <span>Title</span>
         <input className={styles.input} name="title" onChange={onValueChange} />

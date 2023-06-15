@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import App from './App';
+import { renderWithProviders } from '../test/render';
 
 it('renders page title', () => {
-  render(<App />);
+  renderWithProviders(<App />);
   const titleElement = screen.getByText(/Simple Kanban/i);
   expect(titleElement).toBeInTheDocument();
 });

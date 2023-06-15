@@ -33,7 +33,7 @@ export default function Column({ id, title }: ColumnProps) {
         <h2 className={styles.title}>{title}</h2>
         <button
           type="button"
-          title="Add task"
+          title={`Add task to ${title} column`}
           className={styles.button}
           onClick={onAddToggle}
         >
