@@ -1,4 +1,5 @@
 .cardWrap {
+    background-color: var(--color-white);
     cursor: pointer;
     border-radius: 0.5rem;
     padding: var(--padding-s);

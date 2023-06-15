@@ -30,9 +30,10 @@ export const TaskForm = ({ onCancel, onSave }: TaskFormProps) => {
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (!values.title) return;
 
-    event.preventDefault();
     setTouched(true);
     onSave(values);
   };
@@ -69,7 +70,7 @@ export const TaskForm = ({ onCancel, onSave }: TaskFormProps) => {
       </label>
       <div className={styles.buttonsWrap}>
         <Button buttonType={ButtonType.Primary} type="submit">
-          Save task
+          Save Task
         </Button>
         <Button
           onClick={onCancelClick}

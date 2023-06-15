@@ -13,51 +13,19 @@ interface BoardState {
   columns: BoardColumn[];
 }
 
-// TODO: IMPLEMENT!
-const INITIAL_COLUMNS = ['todo', 'inProgress', 'done'];
+const MAX_CARDS_PER_COLUMN = 100;
+const INITIAL_COLUMNS = {
+  todo: 'To Do',
+  inProgress: 'In Progress',
+  done: 'Done',
+};
 
 const initialState: BoardState = {
-  columns: [
-    {
-      id: 'todo',
-      name: 'To Do',
-      cards: [
-        {
-          id: '2',
-          text: 'Have a call with a Close Engineering Manager.',
-          email: 'hakazvaka@gmail.com',
-          title: 'Technical Call 2',
-        },
-      ],
-    },
-    {
-      id: 'inProgress',
-      name: 'In Progress',
-      cards: [
-        { id: '1', text: '123', email: 'hakazvaka@gmail.com', title: 'test' },
-        {
-          id: '3',
-          text: 'Learn about Close culture with Harmonie, from the People Ops team.',
-          email: 'hakazvaka@gmail.com',
-          title: 'Culture Call',
-        },
-        ...Array.from({ length: 10 }).map((_, index) => ({
-          id: `${20 + index}`,
-          text: 20 + index + '123',
-          email: 'hakazvaka@gmail.com',
-          title: `in prog ${index}`,
-        })),
-      ],
-    },
-    {
-      id: 'done',
-      name: 'Done',
-      cards: [
-        { id: '4', text: '123', email: 'hakazvaka@gmail.com', title: 'done 1' },
-        { id: '5', text: '123', email: 'hakazvaka@gmail.com', title: 'done 2' },
-      ],
-    },
-  ],
+  columns: Object.keys(INITIAL_COLUMNS).map((id) => ({
+    id,
+    name: INITIAL_COLUMNS[id as keyof typeof INITIAL_COLUMNS],
+    cards: [],
+  })),
 };
 
 export const boardSlice = createSlice({
@@ -71,7 +39,7 @@ export const boardSlice = createSlice({
       const { columnId, cards } = action.payload;
       const column = state.columns.find((column) => column.id === columnId);
       if (column) {
-        column.cards = cards;
+        column.cards = cards.slice(0, MAX_CARDS_PER_COLUMN);
       }
     },
     addTask: (
@@ -80,7 +48,7 @@ export const boardSlice = createSlice({
     ) => {
       const { columnId, card } = action.payload;
       const column = state.columns.find((column) => column.id === columnId);
-      if (column) {
+      if (column && column.cards.length < MAX_CARDS_PER_COLUMN) {
         const id = nanoid();
         column.cards.unshift({ ...card, id });
       }
