@@ -1,16 +1,27 @@
+import { useState } from 'react';
 import PlusIcon from 'components/icons/PlusIcon';
 
 import styles from './Column.module.css';
-import TaskForm from './TaskForm';
-import { selectColumn } from '../../../state/boardSlice';
-import { useSelector } from 'react-redux';
+import { addTask, selectColumn } from '../../../state/boardSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { TaskCard } from './TaskCard';
 import { Droppable } from '@hello-pangea/dnd';
+import { TaskForm, TaskFormValues } from './TaskForm';
 
 export type ColumnProps = { id: string; title: string };
 export default function Column({ id, title }: ColumnProps) {
+  const dispatch = useDispatch();
+
   const getColumn = useSelector(selectColumn);
   const column = getColumn(id);
+
+  const [showTaskForm, setShowTaskForm] = useState(false);
+  const onAddToggle = () => setShowTaskForm((show) => !show);
+
+  const onAdd = (value: TaskFormValues) => {
+    dispatch(addTask({ columnId: id, card: value }));
+    setShowTaskForm(false);
+  };
 
   return (
     <section
@@ -20,10 +31,16 @@ export default function Column({ id, title }: ColumnProps) {
     >
       <header className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button type="button" title="Add task" className={styles.button}>
+        <button
+          type="button"
+          title="Add task"
+          className={styles.button}
+          onClick={onAddToggle}
+        >
           <PlusIcon />
         </button>
       </header>
+      {showTaskForm && <TaskForm onCancel={onAddToggle} onSave={onAdd} />}
       <Droppable droppableId={id}>
         {(provided) => (
           <div

@@ -1,6 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './';
 import { BoardCard } from './types';
+import { nanoid } from 'nanoid';
 
 export interface BoardColumn {
   id: string;
@@ -36,7 +37,7 @@ const initialState: BoardState = {
         { id: '1', text: '123', email: 'hakazvaka@gmail.com', title: 'test' },
         {
           id: '3',
-          text: 'Learn about Close’s culture with Harmonie, from the People Ops team.',
+          text: 'Learn about Close culture with Harmonie, from the People Ops team.',
           email: 'hakazvaka@gmail.com',
           title: 'Culture Call',
         },
@@ -73,10 +74,21 @@ export const boardSlice = createSlice({
         column.cards = cards;
       }
     },
+    addTask: (
+      state,
+      action: PayloadAction<{ columnId: string; card: Omit<BoardCard, 'id'> }>,
+    ) => {
+      const { columnId, card } = action.payload;
+      const column = state.columns.find((column) => column.id === columnId);
+      if (column) {
+        const id = nanoid();
+        column.cards.unshift({ ...card, id });
+      }
+    },
   },
 });
 
-export const { updateColumn } = boardSlice.actions;
+export const { updateColumn, addTask } = boardSlice.actions;
 
 export const selectAllColumns = (state: RootState) => state.board.columns;
 
