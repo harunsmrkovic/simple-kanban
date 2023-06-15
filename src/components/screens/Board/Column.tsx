@@ -40,7 +40,7 @@ export default function Column({ id, title }: ColumnProps) {
           <PlusIcon />
         </button>
       </header>
-      {showTaskForm && <TaskForm onCancel={onAddToggle} onSave={onAdd} />}
+
       <Droppable droppableId={id}>
         {(provided) => (
           <div
@@ -48,6 +48,7 @@ export default function Column({ id, title }: ColumnProps) {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
+            {showTaskForm && <TaskForm onCancel={onAddToggle} onSave={onAdd} />}
             {column?.cards.map((card, index) => (
               <TaskCard key={card.id} boardCard={card} index={index} />
             ))}

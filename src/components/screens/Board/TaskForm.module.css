@@ -1,0 +1,30 @@
+.wrap {
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-s);
+    gap: var(--padding-s);
+    margin-bottom: var(--padding-s);
+    border-radius: var(--radius-m);
+}
+
+.labelSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs);
+    color: var(--color-text-default);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input {
+    border: 1px solid var(--color-gray-alto);
+    border-radius: var(--radius-m);
+    padding: var(--padding-xs);
+    font-family: var(--font-family);
+}
+
+.buttonsWrap {
+    display: flex;
+    gap: var(--padding-xs);
+}

@@ -5,9 +5,16 @@
   --padding-l: 3rem;
   --padding-xl: 4rem;
 
-  --font-size-m: 1.5rem;
+  --radius-m: 7px;
 
+  --font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-l: 1.5rem;
+
+  --color-white: #ffffff;
   --color-brand-blue: #1463FF;
   --color-gray-5: #F1F1F1;
+  --color-gray-alto: #DDDDDD;
   --color-text-default: #303030;
+  --color-border-primary: #0030CC;
+  --color-background-primary: #1463FF;
 }

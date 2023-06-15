@@ -20,7 +20,7 @@
 
 .title {
   margin: 0;
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-l);
   line-height: 2rem;
   color: #222;
 }
